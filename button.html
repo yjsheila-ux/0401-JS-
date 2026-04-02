@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="name-input">
+    <button>확인</button>    
+
+    <script>
+        // JS 
+        // console.log("hello");
+        const input = document.querySelector(".name-input")
+        const button = document.querySelector("button")
+
+        // input에 사용자가 입력한 값을 출력하는 함수
+        function printInput() {
+            if(input.value.trim() === "") {
+                alert("입력값이 비어 있습니다.")
+            };
+
+            console.log(input.value);
+        }
+
+        // 버튼 요소에 대해 클릭 이벤트가 발생하면, 인풋을 실행해 달라.
+        button.addEventListener("click", printInput);
+
+        // 프론트앤드 개발자로서 하는 일
+        // 1) 함수 정의
+        // 2) EventListener 등록
+    </script>
+</body>
+
+</html>

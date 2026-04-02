@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p id="box">마우스를 올려보세요.</p>
+
+    <!-- <script>
+        // mouseover -> 글씨를 orange
+        // mouseout -> 글씨를 bleck
+
+        const box = document.querySelector("#box");
+
+        function changeColorToOrange() {
+            box.style.color = "orange";
+        };
+        function changeColorToBlack() {
+            box.style.color = "black";
+        };
+
+        box.addEventListener("mouseover", changeColorToOrange);
+        box.addEventListener("mouseout", changeColorToBlack);
+
+    </script> -->
+
+    <!-- <script>
+        const box = document.querySelector("#box");
+
+        // 함수를 안에 넣어서 사용해도 됨. 
+        // 이번테 리스너를 등록 할 때, 함수 정의를 동시에 할 수 있음. 이름 필요없음. 
+        box.addEventListener("mouseover", function () {
+            box.style.color = "orange";
+        });
+        box.addEventListener("mouseout", function () {
+            box.style.color = "black";
+        });
+
+    </script> -->
+
+    <!-- <script>
+        const box = document.querySelector("#box");
+
+        // function 키워드 대신 => 로 사용 가능,
+        // 함수가 한 줄인 경우 {} 없앨 수 있음
+        box.addEventListener("mouseover", () => {
+            box.style.color = "orange";
+        });
+        box.addEventListener("mouseout", () => box.style.color = "black");
+
+    </script> -->
+
+        <script>
+        const box = document.querySelector("#box");
+
+        //changeColor(color)
+        function changeColor(color) {
+            box.style.color = color;
+        };
+
+        box.addEventListener("mouseover", () => changeColor("orange"));
+        box.addEventListener("mouseout", () => box.style.color = "black");
+
+        // 1) '() => {}' 형태를 보면 함수 라고 생각한다.
+        // 2) addEventListener(이벤트, 함수) 두번째 인자는 반드시 함수를 전달한다.
+    </script>
+
+</body>
+
+</html>
