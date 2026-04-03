@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Timer API</h1>
+
+    <!-- <script>
+        //setTimeout(함수, 시간(ms)) : 일정 시간이 지난 뒤에 함수를 한번 실행.
+        // function alertTimeout() {
+        //     alert("타임 아웃이 종료되었습니다.");
+        // };
+
+        // // 3s = 3000ms
+        // setTimeout(alertTimeout, 3000);
+
+        // // 1) 함수 표현식
+        // setTimeout(function alertTimeout() {
+        //     alert("타임 아웃이 종료되었습니다.");
+        // }, 3000);
+
+        // // 2) 화살표 함수
+        // setTimeout(() => alert("타임 아웃이 종료되었습니다."), 3000);
+
+        // setInterval(함수, 시간(ms)) : 일정 시간마다 함수를 반복 실행 할 수 있게 하는
+        // setInterval(()=> alert("3초가 경과되었습니다."), 3000);
+
+        //콘솔에서 실행
+        // setInterval(()=>console.log("3초 경과"),3000);
+        // 함수 호출로 반환값을 받음. -> 인터벌을 건 타이머의 ID가 나옴.
+        // const timerId = setInterval(()=>console.log("3초 경과"),3000);
+        // undefined
+        // 2 3초 경과
+        //clearInterval(timerId)
+
+    </script> -->
+
+    <button id="start">카운트 다운 시작</button>
+    <p id="time"></p>
+
+    <script>
+
+        const startBtn = document.querySelector("#start");
+        const timeEl = document.querySelector("#time");
+
+        let timeLeft = 10;
+            // 2)-1 수정 timerId 를 빈 값으로.
+        let timerId = null;
+
+        // start 버튼에 이벤트 리스너를 추가한다. -> 버튼이 눌리는 순간에 함수를 동작
+        startBtn.addEventListener("click", ()=>{
+            
+                // 2)-3 수정 이미 등록된 타이머가 있으면 무시
+            if (timerId !== null) return;
+
+            // # 버튼 비활성화로 2) 문제 해결 가능 
+            startBtn.disabler = true;
+
+            // 카운트 다운((N--) N -> 0)
+            timeEl.textContent = timeLeft;
+
+            // 1초 마다 타임레프트를 1 줄이고, 화면에 변경된 값을 출력.
+                // 2)-2 수정 const 제거 
+            timerId = setInterval(()=>{
+                timeLeft--;
+
+                    if (timeLeft === 0) {
+                        // timer 중지
+                        timeEl.textContent = "타이머 종료!"
+                        clearInterval(timerId);
+                            // 1) 수정 끝나면 10으로 초기화
+                        timeLeft = 10;
+                            // 2)-4 수정 끝나면 아이디를 초기화.     
+                        timerId = null;
+                        
+                        // 버튼 비활성화 초기화
+                        startBtn.disabler = false;
+                    } else {
+                        // N초(timeLeft >= 0인 경우, 계속 진행)
+                        timeEl.textContent = timeLeft;
+                    }
+
+                    // 문제점 
+                        // 1) 종류 후 다시 시작하면 초기화가 안되서 0초부터 - 로 감.
+                        // 2) 동작 하는 중에 버튼을 누르면 중복이 됨. 
+
+            }, 1000);
+
+        });
+
+    </script>
+</body>
+
+</html>

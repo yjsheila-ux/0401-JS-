@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Fatch API</h1>
+    <!-- 콘솔에서 실습 -->
+    <!-- fetch("https://jsonplaceholder.typicode.com/posts")
+.then(response => response.json())
+.then(data => console.log(data)) -->
+    
+<!-- GET  -->
+    <button id="load">데이터 불러오기</button>
+    <ol id="list"></ol>
+    <!-- 알멩이는 자바스크립트로 채운다.  -->
+
+    <!-- POST -->
+    <input type="email" id="email">
+    <button id="send">데이터 전송하기</button>
+    <pre id="result"></pre>
+
+    <script>
+        const loadBtn = document.querySelector("#load");
+        const list = document.querySelector("#list");
+
+        loadBtn.addEventListener("click", () => {
+            // 초기화
+            list.innerHTML = "";
+
+            fetch("https://jsonplaceholder.typicode.com/posts")
+            .then(response => response.json())
+            .then(posts => {
+                // 서버에서 조회한 데이터(post) 5개의 제목을 동적으로 list에 추가.
+                // python : posts[:5]
+                for(const post of posts.slice(0, 5)) {
+                    const li = document.createElement("li");
+                    li.textContent = post.title;
+                    list.appendChild(li);
+                }
+            }); //랜덤 5개 하고싶다.
+        });
+
+        //POST
+        const input = document.querySelector("#email");
+        const sendBtn = document.querySelector("#send");
+        const result = document.querySelector("#result");
+
+        sendBtn.addEventListener("cilck", () => {
+            // email 을 서버로 전송하고, 응답 결과를  JSON으로 출력
+            // fetch("https://jsonplaceholder.typicode.com/posts", {
+            //     //옵션 제공 
+            //         method: "POST",
+            //         headers:{"Content-Type": "application/json"},
+            //         body: JSON.stringify({emeil: input.value}),
+            //     })
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         result.textContent = JSON.stringify(data, null, 2); // 2칸씩 들여쓰기
+            // })
+
+            // 강사님 코드. 
+            fetch("https://jsonplaceholder.typicode.com/posts", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: input.value }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    result.textContent = JSON.stringify(data, null, 2);  // 2칸씩 들여쓰기
+                })
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <h1>LocalStorage</h1> -->
+    <!-- 콘솔에서 진행 -->
+    <!-- localStorage.setItem("name", "alex"); // 어플리케이션 스트로지에 저장되어 있음
+    localStorage.getItem("name")
+'alex'
+localStorage.setItem("age", 30);
+undefined
+typeof localStorage.getItem("age")
+'string'
+localStorage.setItem("numbers",[1,2,3]);
+undefined
+localStorage.getItem("numbers");
+'1,2,3'
+localStorage.getItem("numbers")[0];
+'1'
+localStorage.getItem("numbers")[1];
+',' -->
+<!-- // JSON
+localStorage.setItem("numbers", JSON.stringify([1,2,3])
+
+JSON.stringify([1,2,3])
+'[1,2,3]'
+[1,2,3].toString()
+'1,2,3'
+let numbers = JSON.stringify([1,2,3])
+undefined
+numbers
+'[1,2,3]'
+JSON.parse(localStorage.getItem()) -->
+<!-- 
+정의 
+1) storage API는 값으로 문자열만 허용.
+2) 다른 타입의 값을  저장:JSON.stringify  읽기:JSON.parse -->
+
+<!-- localStorage.removeItem("users") -> 유저 삭제
+localStorage.clear() -> 전체 삭제
+
+아무것도 없을때 (존재하지 않는 키면) null -->
+
+<!-- 사이트마다 분리되어 저장되어 있음 ... 쿠키 같이 -->
+
+    <!-- <h1>SessionStorage</h1> -->
+    <!-- local - 내 컴퓨터
+    session - 짧은 기간 , 작업 단위 , 화면이 열려 있는 동안만/ 
+    tap 이 다르면 정보는 없음, 새로고침은 정보 남아있음 -->
+
+<!-- sessionStorage.setItem("name","bob")
+undefined
+sessionStorage.getItem("name")
+'bob' -->
+
+    <input type="text" id="name" placeholder="이름 입력..." autocomplete="off">
+    <button id="save">저장</button>
+    <button id="reset">리셋</button>
+    <p id="result"></p>
+
+    <script>
+        // 한번 이름을 저장하면, 브라우저를 닫았다가 열어도 이름이 유지되게 하기
+        const input = document.querySelector("#name");
+        const button = document.querySelector("#save");
+        const reset = document.querySelector("#reset");
+        const result = document.querySelector("#result");
+
+        // DOM 그릴 때, 로컬 스토리를 읽어서 저장된 이름이 있으면 출력
+        const savedUser = localStorage.getItem("name");
+        if (savedUser) {
+            result.textContent = savedUser;
+        };
+
+        // input 값을 p태그에 
+        button.addEventListener("cilck", () => {
+            // 캐싱(caching) = 임시 저장소에 데이터를 저장하는 기술
+            localStorage.setItem("name", input.value);
+            result.textContent = input.value;
+        });
+
+        // 리셋 버튼을 누르면, 이름 리셋
+
+        // const reset = document.querySelector("#reset");
+        // button.addEventListener("click", () => {
+            // result
+
+        // })
+
+        reset.addEventListener("click", () => {
+            localStorage.removeItem("name");
+            result.textContent = "";
+        })
+
+    </script>
+</body>
+
+</html>
